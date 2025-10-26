@@ -156,6 +156,15 @@
             margin-top: 5px;
         }
 
+        /* Style for the disabled button */
+        .explore-btn:disabled {
+            background-color: #e0e0e0;
+            color: #a0a0a0;
+            cursor: not-allowed;
+            box-shadow: none;
+            border: 1px solid #cccccc;
+        }
+
         .explore-btn {
             background: #fff;
             color: #ff9a9e;
@@ -170,7 +179,7 @@
             margin-bottom: 20px;
         }
 
-        .explore-btn:hover {
+        .explore-btn:not(:disabled):hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
@@ -274,7 +283,7 @@
         </header>
 
         <div class="card">
-            <h2 class="card-title">Happy Birthday!</h2>
+            <h2 class="card-title">The Last Moments of Your Day</h2>
             <div class="ribbon-container">
                 <span class="ribbon"><i class="fas fa-gift"></i></span>
                 <span class="ribbon"><i class="fas fa-birthday-cake"></i></span>
@@ -282,10 +291,6 @@
             </div>
             
             <div class="countdown">
-                <div class="countdown-item">
-                    <span class="countdown-number" id="days">00</span>
-                    <span class="countdown-label">Days</span>
-                </div>
                 <div class="countdown-item">
                     <span class="countdown-number" id="hours">00</span>
                     <span class="countdown-label">Hours</span>
@@ -301,9 +306,10 @@
             </div>
         </div>
 
-       <button class="explore-btn" onclick="openMemoriesPage()">
-    <i class="fas fa-heart"></i> Explore Our Memories
-</button>
+        <!-- The button is now disabled by default and has an ID -->
+        <button class="explore-btn" id="revealBtn" disabled>
+            <i class="fas fa-lock"></i> <span id="btnText">Wait for Midnight...</span>
+        </button>
     </div>
 
     <button class="music-btn" id="musicBtn">
@@ -311,36 +317,62 @@
     </button>
 
     <script>
+        // Get the button and its text span element
+        const revealBtn = document.getElementById('revealBtn');
+        const btnText = document.getElementById('btnText');
+
         // Countdown Timer
         function updateCountdown() {
-            // Set the birthday date (change this to your girlfriend's birthday)
-            const birthday = new Date('2024-12-25T00:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = birthday - now;
+            // --- MODIFIED: Calculate the time for the next midnight ---
+            const now = new Date();
+            const midnight = new Date();
+            midnight.setHours(24, 0, 0, 0); // Set to 24:00:00 of the current day
+            
+            const distance = midnight - now;
 
+            // --- MODIFIED: When the countdown is finished ---
             if (distance < 0) {
-                document.getElementById('days').innerText = '00';
+                // Stop the countdown display
                 document.getElementById('hours').innerText = '00';
                 document.getElementById('minutes').innerText = '00';
                 document.getElementById('seconds').innerText = '00';
-                return;
+
+                // Enable the button and change its text
+                revealBtn.disabled = false;
+                btnText.innerText = "Open Your Final Wish!";
+                revealBtn.innerHTML = '<i class="fas fa-heart"></i> ' + btnText.innerText;
+                
+                // Stop the function from running again
+                return; 
             }
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            // Calculate hours, minutes, seconds
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            // Update the countdown display
             document.getElementById('hours').innerText = String(hours).padStart(2, '0');
             document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
             document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
         }
 
+        // This function now opens the page when the button is clicked
+        function openMemoriesPage() {
+            // Only open if the button is not disabled
+            if (!revealBtn.disabled) {
+                window.location.href = "fir.html";
+            }
+        }
+        
+        // Add the click listener to the button
+        revealBtn.addEventListener('click', openMemoriesPage);
+
+        // Start the countdown
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Music button toggle
+        // Music button toggle (no changes here)
         const musicBtn = document.getElementById('musicBtn');
         let musicPlaying = false;
 
@@ -349,7 +381,6 @@
             if (musicPlaying) {
                 musicBtn.classList.add('playing');
                 musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                // In a real implementation, you would play actual music here
                 console.log('Music playing...');
             } else {
                 musicBtn.classList.remove('playing');
@@ -358,11 +389,11 @@
             }
         });
 
-        // Create floating hearts
+        // Create floating hearts (no changes here)
         function createHeart() {
             const heart = document.createElement('div');
             heart.className = 'heart';
-            heart.innerHTML = '❤️';
+            heart.innerHTML = '❤';
             heart.style.left = Math.random() * 100 + '%';
             heart.style.animationDelay = Math.random() * 5 + 's';
             heart.style.fontSize = Math.random() * 20 + 20 + 'px';
@@ -373,13 +404,7 @@
             }, 6000);
         }
 
-        // Create hearts periodically
         setInterval(createHeart, 3000);
-
-            function openMemoriesPage() {
-    // Opens the surprise page (make sure this file name matches)
-    window.location.href = "fir.html";  
-}
 
     </script>
 </body>
