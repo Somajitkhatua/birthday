@@ -1,71 +1,386 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <title>Happy Birthday Surprise</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <link rel="stylesheet" href="style.css" />
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #fff;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: #ff9a9e;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .card-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ribbon-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ribbon {
+            font-size: 2rem;
+            color: #fff;
+            margin: 0 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .ribbon:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .ribbon:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: rgba(255,255,255,0.3);
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 120px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: #fff;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .explore-btn {
+            background: #fff;
+            color: #ff9a9e;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .explore-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .music-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #fff;
+            color: #ff9a9e;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .music-btn.playing {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 154, 158, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 154, 158, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 154, 158, 0); }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating hearts */
+        .heart {
+            position: fixed;
+            color: rgba(255, 255, 255, 0.8);
+            animation: floatHeart 6s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes floatHeart {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .card-title {
+                font-size: 2rem;
+            }
+            
+            .countdown-item {
+                min-width: 100px;
+                padding: 15px;
+            }
+            
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Happy Birthday My Love</h1>
+            <p class="subtitle">To the most amazing person in my life</p>
+        </header>
 
-  <!-- Decorations -->
-  <div class="heart-container" id="heartContainer"></div>
-  <div class="balloon-container" id="balloonContainer" style="display: none;"></div>
+        <div class="card">
+            <h2 class="card-title">Happy Birthday!</h2>
+            <div class="ribbon-container">
+                <span class="ribbon"><i class="fas fa-gift"></i></span>
+                <span class="ribbon"><i class="fas fa-birthday-cake"></i></span>
+                <span class="ribbon"><i class="fas fa-gift"></i></span>
+            </div>
+            
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+        </div>
 
-  <!-- Page 1 -->
-  <div class="page active" id="page1">
-    <div class="birthday-box">
-      <h1>Happy Birthday My Love! 💖</h1>
-      <p><strong>To the most amazing woman in my life</strong></p>
-      <p><em>“Every moment with you is a gift, and today we celebrate the greatest gift of all – YOU!” 💐</em></p>
-      <button onclick="goToPage(2)">Begin Your Surprise! 💝</button>
+       <button class="explore-btn" onclick="openMemoriesPage()">
+    <i class="fas fa-heart"></i> Explore Our Memories
+</button>
     </div>
-  </div>
 
-  <!-- Page 2 -->
-  <div class="page" id="page2">
-    <h1 style="color:#d63384;">Mirror of Memories</h1>
-    <div class="mirror-box" onclick="goToPage(3)">
-      💗 Tap to unlock our moments 💗
-    </div>
-  </div>
+    <button class="music-btn" id="musicBtn">
+        <i class="fas fa-music"></i>
+    </button>
 
-  <!-- Page 3 -->
-  <div class="page" id="page3">
-    <h1>Our Beautiful Moments 💑</h1>
-    <div class="photo-grid" id="photoGrid">
-      <img src="memori.jpg" alt="Photo 1" />
-      <img src="sundariii.jpg" alt="Photo 2" />
-      <img src="sundari.jpg" alt="Photo 3" />
-      <img src="we.jpg" alt="Photo 4" />
-      <img src="weee.jpg" alt="Photo 5" />
-    </div>
-    <button onclick="showNextImage()">Get Our Memory 📸</button>
-  </div>
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            // Set the birthday date (change this to your girlfriend's birthday)
+            const birthday = new Date('2024-12-25T00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = birthday - now;
 
-  <!-- Page 4 -->
-  <div class="page" id="page4">
-    <h1>🎂 Your Special Cake 🎂</h1>
-    <img class="cake-img" src="Sparkling.png" alt="Cake with candle" />
-    <p>May your day be as sweet and lovely as this cake. 🍰</p>
-    <button onclick="goToPage(5)">Get the Wishess 💌</button>
-  </div>
+            if (distance < 0) {
+                document.getElementById('days').innerText = '00';
+                document.getElementById('hours').innerText = '00';
+                document.getElementById('minutes').innerText = '00';
+                document.getElementById('seconds').innerText = '00';
+                return;
+            }
 
-  <!-- Page 5 -->
-  <div class="page" id="page5">
-    <div class="wish-header">Happy Birthday My Madam Jii 🎀</div>
-    <div class="wish-box">
-      <div id="typingText" class="typing"></div>
-    </div>
-  </div>
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  <script src="script.js"></script>
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Music button toggle
+        const musicBtn = document.getElementById('musicBtn');
+        let musicPlaying = false;
+
+        musicBtn.addEventListener('click', function() {
+            musicPlaying = !musicPlaying;
+            if (musicPlaying) {
+                musicBtn.classList.add('playing');
+                musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                // In a real implementation, you would play actual music here
+                console.log('Music playing...');
+            } else {
+                musicBtn.classList.remove('playing');
+                musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+                console.log('Music paused');
+            }
+        });
+
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        // Create hearts periodically
+        setInterval(createHeart, 3000);
+
+            function openMemoriesPage() {
+    // Opens the surprise page (make sure this file name matches)
+    window.location.href = "index.html";  
+}
+
+    </script>
 </body>
-
 </html>
