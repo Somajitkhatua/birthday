@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday Surprise</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Decorations -->
+  <div class="heart-container" id="heartContainer"></div>
+  <div class="balloon-container" id="balloonContainer" style="display: none;"></div>
+
+  <!-- Page 1 -->
+  <div class="page active" id="page1">
+    <div class="birthday-box">
+      <h1>Happy Birthday My Love! 💖</h1>
+      <p><strong>To the most amazing woman in my life</strong></p>
+      <p><em>“Every moment with you is a gift, and today we celebrate the greatest gift of all – YOU!” 💐</em></p>
+      <button onclick="goToPage(2)">Begin Your Surprise! 💝</button>
+    </div>
+  </div>
+
+  <!-- Page 2 -->
+  <div class="page" id="page2">
+    <h1 style="color:#d63384;">Mirror of Memories</h1>
+    <div class="mirror-box" onclick="goToPage(3)">
+      💗 Tap to unlock our moments 💗
+    </div>
+  </div>
+
+  <!-- Page 3 -->
+  <div class="page" id="page3">
+    <h1>Our Beautiful Moments 💑</h1>
+    <div class="photo-grid" id="photoGrid">
+      <img src="memori.jpg" alt="Photo 1" />
+      <img src="sundariii.jpg" alt="Photo 2" />
+      <img src="sundari.jpg" alt="Photo 3" />
+      <img src="we.jpg" alt="Photo 4" />
+      <img src="weee.jpg" alt="Photo 5" />
+    </div>
+    <button onclick="showNextImage()">Get Our Memory 📸</button>
+  </div>
+
+  <!-- Page 4 -->
+  <div class="page" id="page4">
+    <h1>🎂 Your Special Cake 🎂</h1>
+    <img class="cake-img" src="Sparkling.png" alt="Cake with candle" />
+    <p>May your day be as sweet and lovely as this cake. 🍰</p>
+    <button onclick="goToPage(5)">Get the Wishess 💌</button>
+  </div>
+
+  <!-- Page 5 -->
+  <div class="page" id="page5">
+    <div class="wish-header">Happy Birthday My Madam Jii 🎀</div>
+    <div class="wish-box">
+      <div id="typingText" class="typing"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
