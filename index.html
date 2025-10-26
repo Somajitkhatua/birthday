@@ -7,12 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
@@ -24,18 +19,8 @@
             padding: 20px;
             overflow-x: hidden;
         }
-
-        .container {
-            width: 100%;
-            max-width: 800px;
-            text-align: center;
-        }
-
-        .header {
-            margin-bottom: 40px;
-            animation: fadeInDown 1s ease;
-        }
-
+        .container { width: 100%; max-width: 800px; text-align: center; }
+        .header { margin-bottom: 40px; animation: fadeInDown 1s ease; }
         .title {
             font-family: 'Dancing Script', cursive;
             font-size: 3.5rem;
@@ -43,14 +28,7 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
             margin-bottom: 10px;
         }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: #fff;
-            font-weight: 400;
-            opacity: 0.9;
-        }
-
+        .subtitle { font-size: 1.2rem; color: #fff; font-weight: 400; opacity: 0.9; }
         .card {
             background: #ff9a9e;
             border-radius: 20px;
@@ -61,29 +39,14 @@
             position: relative;
             overflow: hidden;
         }
-
-        .card::before {
+        .card::before, .card::after {
             content: '';
             position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
             background: rgba(255,255,255,0.1);
             border-radius: 50%;
         }
-
-        .card::after {
-            content: '';
-            position: absolute;
-            bottom: -30px;
-            left: -30px;
-            width: 100px;
-            height: 100px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-        }
-
+        .card::before { top: -50px; right: -50px; width: 150px; height: 150px; }
+        .card::after { bottom: -30px; left: -30px; width: 100px; height: 100px; }
         .card-title {
             font-family: 'Dancing Script', cursive;
             font-size: 2.5rem;
@@ -92,79 +55,16 @@
             position: relative;
             z-index: 1;
         }
-
-        .ribbon-container {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-            position: relative;
-            z-index: 1;
-        }
-
+        .ribbon-container { display: flex; justify-content: center; margin: 20px 0; position: relative; z-index: 1; }
         .ribbon {
             font-size: 2rem;
             color: #fff;
             margin: 0 10px;
             animation: float 3s ease-in-out infinite;
         }
-
-        .ribbon:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-
-        .ribbon:nth-child(3) {
-            animation-delay: 1s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-
-        .countdown-item {
-            background: rgba(255,255,255,0.3);
-            border-radius: 15px;
-            padding: 20px;
-            min-width: 120px;
-            backdrop-filter: blur(5px);
-            transition: transform 0.3s ease;
-        }
-
-        .countdown-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .countdown-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #fff;
-            display: block;
-        }
-
-        .countdown-label {
-            font-size: 0.9rem;
-            color: #fff;
-            text-transform: uppercase;
-            margin-top: 5px;
-        }
-
-        /* Style for the disabled button */
-        .explore-btn:disabled {
-            background-color: #e0e0e0;
-            color: #a0a0a0;
-            cursor: not-allowed;
-            box-shadow: none;
-            border: 1px solid #cccccc;
-        }
-
+        .ribbon:nth-child(2) { animation-delay: 0.5s; }
+        .ribbon:nth-child(3) { animation-delay: 1s; }
+        @keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);} }
         .explore-btn {
             background: #fff;
             color: #ff9a9e;
@@ -178,12 +78,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
-
-        .explore-btn:not(:disabled):hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
+        .explore-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
         .music-btn {
             position: fixed;
             bottom: 30px;
@@ -200,79 +95,13 @@
             transition: all 0.3s ease;
             z-index: 100;
         }
-
-        .music-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        .music-btn.playing {
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 154, 158, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 154, 158, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 154, 158, 0); }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Floating hearts */
-        .heart {
-            position: fixed;
-            color: rgba(255, 255, 255, 0.8);
-            animation: floatHeart 6s ease-in-out infinite;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        @keyframes floatHeart {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .title {
-                font-size: 2.5rem;
-            }
-            
-            .card-title {
-                font-size: 2rem;
-            }
-            
-            .countdown-item {
-                min-width: 100px;
-                padding: 15px;
-            }
-            
-            .countdown-number {
-                font-size: 1.5rem;
-            }
-        }
+        .music-btn:hover { transform: scale(1.1); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .music-btn.playing { animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,154,158,0.7);} 70%{box-shadow:0 0 0 10px rgba(255,154,158,0);} 100%{box-shadow:0 0 0 0 rgba(255,154,158,0);} }
+        @keyframes fadeInDown { from {opacity:0;transform:translateY(-30px);} to {opacity:1;transform:translateY(0);} }
+        @keyframes fadeInUp { from {opacity:0;transform:translateY(30px);} to {opacity:1;transform:translateY(0);} }
+        .heart { position: fixed; color: rgba(255,255,255,0.8); animation: floatHeart 6s ease-in-out infinite; z-index:1; pointer-events:none; }
+        @keyframes floatHeart { 0%,100%{transform:translateY(0) rotate(0deg); opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{transform:translateY(-100vh) rotate(720deg);opacity:0;} }
     </style>
 </head>
 <body>
@@ -283,33 +112,18 @@
         </header>
 
         <div class="card">
-            <h2 class="card-title">The Last Moments of Your Day</h2>
+            <h2 class="card-title">A Special Surprise for You</h2>
             <div class="ribbon-container">
                 <span class="ribbon"><i class="fas fa-gift"></i></span>
                 <span class="ribbon"><i class="fas fa-birthday-cake"></i></span>
                 <span class="ribbon"><i class="fas fa-gift"></i></span>
             </div>
-            
-            <div class="countdown">
-                <div class="countdown-item">
-                    <span class="countdown-number" id="hours">00</span>
-                    <span class="countdown-label">Hours</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="minutes">00</span>
-                    <span class="countdown-label">Minutes</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="seconds">00</span>
-                    <span class="countdown-label">Seconds</span>
-                </div>
-            </div>
-        </div>
 
-        <!-- The button is now disabled by default and has an ID -->
-        <button class="explore-btn" id="revealBtn" disabled>
-            <i class="fas fa-lock"></i> <span id="btnText">Wait for Midnight...</span>
-        </button>
+            <!-- Button clickable immediately -->
+            <button class="explore-btn" id="revealBtn">
+                <i class="fas fa-heart"></i> Open Your Final Wish!
+            </button>
+        </div>
     </div>
 
     <button class="music-btn" id="musicBtn">
@@ -317,79 +131,27 @@
     </button>
 
     <script>
-        // Get the button and its text span element
+        // Open memories page when button is clicked
         const revealBtn = document.getElementById('revealBtn');
-        const btnText = document.getElementById('btnText');
+        revealBtn.addEventListener('click', () => {
+            window.location.href = "fir.html";
+        });
 
-        // Countdown Timer
-        function updateCountdown() {
-            // --- MODIFIED: Calculate the time for the next midnight ---
-            const now = new Date();
-            const midnight = new Date();
-            midnight.setHours(24, 0, 0, 0); // Set to 24:00:00 of the current day
-            
-            const distance = midnight - now;
-
-            // --- MODIFIED: When the countdown is finished ---
-            if (distance < 0) {
-                // Stop the countdown display
-                document.getElementById('hours').innerText = '00';
-                document.getElementById('minutes').innerText = '00';
-                document.getElementById('seconds').innerText = '00';
-
-                // Enable the button and change its text
-                revealBtn.disabled = false;
-                btnText.innerText = "Open Your Final Wish!";
-                revealBtn.innerHTML = '<i class="fas fa-heart"></i> ' + btnText.innerText;
-                
-                // Stop the function from running again
-                return; 
-            }
-
-            // Calculate hours, minutes, seconds
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Update the countdown display
-            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
-        }
-
-        // This function now opens the page when the button is clicked
-        function openMemoriesPage() {
-            // Only open if the button is not disabled
-            if (!revealBtn.disabled) {
-                window.location.href = "fir.html";
-            }
-        }
-        
-        // Add the click listener to the button
-        revealBtn.addEventListener('click', openMemoriesPage);
-
-        // Start the countdown
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // Music button toggle (no changes here)
+        // Music button toggle
         const musicBtn = document.getElementById('musicBtn');
         let musicPlaying = false;
-
-        musicBtn.addEventListener('click', function() {
+        musicBtn.addEventListener('click', () => {
             musicPlaying = !musicPlaying;
-            if (musicPlaying) {
+            if(musicPlaying){
                 musicBtn.classList.add('playing');
                 musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                console.log('Music playing...');
             } else {
                 musicBtn.classList.remove('playing');
                 musicBtn.innerHTML = '<i class="fas fa-music"></i>';
-                console.log('Music paused');
             }
         });
 
-        // Create floating hearts (no changes here)
+        // Floating hearts
         function createHeart() {
             const heart = document.createElement('div');
             heart.className = 'heart';
@@ -398,14 +160,9 @@
             heart.style.animationDelay = Math.random() * 5 + 's';
             heart.style.fontSize = Math.random() * 20 + 20 + 'px';
             document.body.appendChild(heart);
-
-            setTimeout(() => {
-                heart.remove();
-            }, 6000);
+            setTimeout(() => heart.remove(), 6000);
         }
-
         setInterval(createHeart, 3000);
-
     </script>
 </body>
 </html>
